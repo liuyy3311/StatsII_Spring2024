@@ -26,6 +26,7 @@ summary(graduation)
 graduation[which(graduation$nsibs < 0),]
 graduation <- graduation[-which(graduation$nsibs < 0),]
 
+
 # Model one: 
 graduation$nsibs_cut <- cut(graduation$nsibs, 
                             breaks = c(0, 0.9, 1, 3, Inf), 
@@ -36,7 +37,7 @@ mod_1 <- glm(hsgrad ~.,
              data = graduation[,!names(graduation) %in% c("nsibs")], 
              family = "binomial")
 
-
+summary(mod_1)
 # A more parsimonious model
 mod_2 <- glm(hsgrad ~ nsibs_cut + income + nonwhite, 
              data = graduation, 
