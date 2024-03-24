@@ -27,7 +27,7 @@ pkgTest <- function(pkg){
 # ex: stringr
 # lapply(c("stringr"),  pkgTest)
 
-lapply(c("nnet", "MASS"),  pkgTest)
+lapply(c("nnet", "MASS", "dplyr", "stargazer", "texreg"),  pkgTest)
 
 # set wd for current folder
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
@@ -64,7 +64,7 @@ gdp_data$GDPWdiff <- relevel(gdp_data$GDPWdiff, ref = "no change")
 #Constract a unordered multinomial logit 
 unorder_model <- multinom(GDPWdiff~OIL+REG, data = gdp_data,)
 summary(unorder_model)
-exp(coef(unorder_model))
+texreg(list(unorder_model), digits=3)
 
 # get p values
 z <- summary(unorder_model)$coefficients/summary(unorder_model)$standard.errors
@@ -77,6 +77,7 @@ gdp_data$GDPWdiff <- factor(gdp_data$GDPWdiff,
 levels(gdp_data$GDPWdiff)
 order_model <- polr(GDPWdiff~OIL+REG, data = gdp_data, Hess = TRUE)
 summary(order_model)
+texreg(list(order_model), digits=3)
 
 #Calculate P value
 ctable <- coef(summary(order_model))
@@ -104,6 +105,7 @@ with(
 #Run a poisson regression model
 model.pois <- glm(PAN.visits.06 ~competitive.district+marginality.06+PAN.governor.06, data = mexico_elections, family = poisson)
 summary(model.pois)
+texreg(list(model.pois), digits=3)
 
 # predicted the mean number by R
 pred <- data.frame(
@@ -117,7 +119,6 @@ predict(model.pois, newdata = pred, type = "response")
 
 # calculate pseudo R squared
 1 - (model.pois$deviance / model.pois$null.deviance)
-
 
 # c) Over-dispersion?
 install.packages("AER")
