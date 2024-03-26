@@ -1,4 +1,4 @@
-data <- read.csv("data/long97.csv")
+data <- read.csv("E:/Users/12420/Documents/GitHub/StatsII_Spring2024/datasets/long97.csv")
 
 with(data,
      hist(job))
@@ -14,3 +14,4 @@ summary(m3 <- lm(jobcen ~ ., data = data[data$jobcen > 1, -1])) # effect of bein
 
 # Tobit 
 summary(m.tobit <- vglm(job ~ ., tobit(Lower = 1), data[,-2])) # effect of being a woman is significant and negative
+
