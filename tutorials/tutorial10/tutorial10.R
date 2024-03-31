@@ -53,3 +53,4 @@ lapply(c("survival", "eha", "tidyverse", "ggfortify", "stargazer"),  pkgTest)
 ## b) Run a Cox Proportional Hazard regression on the data, using an additive model with 
 ##    `socBranch` and `sex` as explanatory variables. Run a test to assess the quality of the
 ##    model. How can we interpret the coefficients? Plot the model.
+
