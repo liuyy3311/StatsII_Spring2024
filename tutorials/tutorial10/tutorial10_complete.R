@@ -33,6 +33,7 @@ exp(-0.083546)
 # likely to die (92 female babies die for every 100 male babies; female deaths are 8% lower, etc.)
 
 cox_fit <- survfit(cox)
+cox_fit
 autoplot(cox_fit)
 
 newdat <- with(child, 
