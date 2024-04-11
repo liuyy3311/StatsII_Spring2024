@@ -1,0 +1,110 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{graphicx,textcomp}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyvrb}
+\usepackage{amssymb,enumerate}
+\usepackage[all]{xy}
+\usepackage{endnotes}
+\usepackage{lscape}
+\newtheorem{com}{Comment}
+\usepackage{float}
+\usepackage{hyperref}
+\newtheorem{lem} {Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{cor}{Corollary}
+\newtheorem{obs}{Observation}
+\usepackage[compact]{titlesec}
+\usepackage{dcolumn}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{multirow}
+\usepackage{xcolor}
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+\definecolor{light-gray}{gray}{0.65}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+\newcommand{\Sref}[1]{Section~\ref{#1}}
+\newtheorem{hyp}{Hypothesis}
+
+\title{Problem Set 4}
+\date{Due: April 12, 2024}
+\author{Yuanyuan Liu}
+
+
+\begin{document}
+	\maketitle
+	\section*{Instructions}
+	\begin{itemize}
+	\item Please show your work! You may lose points by simply writing in the answer. If the problem requires you to execute commands in \texttt{R}, please include the code you used to get your answers. Please also include the \texttt{.R} file that contains your code. If you are not sure if work needs to be shown for a particular problem, please ask.
+	\item Your homework should be submitted electronically on GitHub in \texttt{.pdf} form.
+	\item This problem set is due before 23:59 on Friday April 12, 2024. No late assignments will be accepted.
+
+	\end{itemize}
+
+	\vspace{.25cm}
+\section*{Question 1}
+\vspace{.25cm}
+\noindent We're interested in modeling the historical causes of child mortality. We have data from 26855 children born in Skellefteå, Sweden from 1850 to 1884. Using the "child" dataset in the \texttt{eha} library, fit a Cox Proportional Hazard model using mother's age and infant's gender as covariates. Present and interpret the output.
+\lstinputlisting[firstline=1, lastline=29]{PS4_Yuanyuan_Liu.R}
+
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com% Date and time: Thu, Apr 11, 2024 - 20:04:21
+\begin{table}[!htbp] \centering   \caption{}   \label{} 
+	\begin{tabular}{@{\extracolsep{5pt}}lc} \\[-1.8ex]\hline \hline \\[-1.8ex]  & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ \cline{2-2} \\[-1.8ex] & child\_surv \\ \hline \\[-1.8ex]  m.age & 0.008$^{***}$ \\   & (0.002) \\   & \\  sexfemale & $-$0.082$^{***}$ \\   & (0.027) \\   & \\ \hline \\[-1.8ex] Observations & 26,574 \\ R$^{2}$ & 0.001 \\ Max. Possible R$^{2}$ & 0.986 \\ Log Likelihood & $-$56,503.480 \\ Wald Test & 22.520$^{***}$ (df = 2) \\ LR Test & 22.518$^{***}$ (df = 2) \\ Score (Logrank) Test & 22.530$^{***}$ (df = 2) \\ \hline \hline \\[-1.8ex] \textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+	\end{tabular} 
+\end{table} 
+
+
+\noindent One unit increase in mother’s age associate with a 0.008 increase in the expected to log of the hazard , holding infant’s gender constant.
+There is a 0.08 decrease in the expected log of hazard for female babies compared to male,holding mother’s age constant.
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com% Date and time: Thu, Apr 11, 2024 - 20:35:33
+\begin{table}[!htbp] \centering   \caption{}   \label{} \begin{tabular}{@{\extracolsep{5pt}} cc} \\[-1.8ex]\hline \hline \\[-1.8ex] m.age & sexfemale \\ \hline \\[-1.8ex] $1.008$ & $0.921$ \\ \hline \\[-1.8ex] \end{tabular} 
+\end{table} 
+\noindent The hazard ratio of female babies is 0.92 that of male babies, female babies are less likely to die(92 female babies die for every 100 male babies; female deaths are 8% lower)
+One unit increase of mother’s age associate with hazard by 1.0076.
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=0.8\textwidth]{Rplot.png} % 图片文件的路径
+	\caption{plot}
+	\label{fig:example}
+\end{figure}
+
+
+\noindent The Kaplan-Meier curve starts at 100\% and decreases over time, indicating that the individual's survival rate decreases over time. The small black line in the figure represents the uncertainty in the estimate of survival time, or the number of survival state changes at a certain point in time, which is often called censoring. When censoring occurs, estimates of the survival function can only be based on those individuals who are still alive (or in study) up to that point. It can be seen that as time goes by, the survival probability drops to about 75\%.
+\end{document}
